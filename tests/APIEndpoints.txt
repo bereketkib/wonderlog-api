@@ -1,0 +1,82 @@
+Authentication Endpoints
+
+POST /auth/register
+- Register new user (USER role by default)
+- Required: name, email, password
+
+POST /auth/login
+- Login user
+- Required: email, password
+- Returns: user data, accessToken (refreshToken in cookie)
+
+DELETE /auth/logout
+- Logout user
+- Required: refreshToken in body
+- Requires: Authentication
+
+POST /auth/refresh
+- Refresh access token
+- Required: refreshToken in cookie
+
+
+
+User Endpoints
+
+POST /users/upgrade-to-author
+- Upgrade normal user to author role
+- Requires: Authentication
+
+
+
+Post Endpoints
+
+GET /posts
+- Get all published posts
+- Optional: page, limit, search
+- Public access
+
+GET /posts/:id
+- Get single published post with comments
+- Public access
+
+GET /posts/my
+- Get author's posts (published & drafts)
+- Requires: Authentication, Author role
+- Optional: page, limit, search
+
+POST /posts/my
+- Create new post
+- Requires: Authentication, Author role
+- Required: title, content
+- Optional: published (boolean)
+
+PUT /posts/my/:id
+- Update author's post
+- Requires: Authentication, Author role
+- Optional: title, content, published
+
+DELETE /posts/my/:id
+- Delete author's post
+- Requires: Authentication, Author role
+
+
+
+Comment Endpoints
+
+POST /comments/:postId
+- Create comment on published post
+- Requires: Authentication
+- Required: content
+
+PUT /comments/:id
+- Update user's own comment
+- Requires: Authentication
+- Required: content
+
+DELETE /comments/:id
+- Delete user's own comment
+- Requires: Authentication
+
+GET /comments/my
+- Get user's comments with post info
+- Requires: Authentication

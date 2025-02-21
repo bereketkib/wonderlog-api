@@ -1,0 +1,112 @@
+### Register normal user
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "name": "Normal User",
+    "email": "user@example.com",
+    "password": "password123"
+}
+
+### Register author user
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "name": "Author User",
+    "email": "author@example.com",
+    "password": "password123"
+}
+
+### Login normal user
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "email": "bekibreab@gmail.com",
+    "password": "KI890pol"
+}
+
+### Upgrade to author role
+POST http://localhost:3000/users/upgrade-to-author
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5MjM3ZmZhNi0xNGE2LTQ2ODUtYTAwMy0xOTU0ZjAzMTkwZjAiLCJpYXQiOjE3MzkxOTU0OTcsImV4cCI6MTczOTE5NjM5N30.1xw-ctetMZNXpPylLr-clzOXDhhw0qBDufDygLXXqdE
+
+### Create post (as author)
+POST http://localhost:3000/posts/my
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3OTBkMzI3MS1lNDZkLTRlNTMtYTcxMi1iZmZjZDE5ZGZkNDUiLCJpYXQiOjE3MzkyODkyNTMsImV4cCI6MTczOTI5MDE1M30.hjPiZEki4KEyOGn4OXC-9EvpIiIAiaKp9CX-O6uFbF8
+Content-Type: application/json
+
+{
+    "title": "From Curiosity to Code: My Journey as a Software Developer",
+    "content": "It started with curiosity. The first time I saw a website interact with a user, I wondered: How does this work? That question led me down a path I never expected—one where every challenge became a puzzle and every solution, a victory.I started small—tinkering with HTML, CSS, and JavaScript, breaking things more often than fixing them. But each mistake taught me something new. The frustration of debugging turned into excitement when I finally saw my code work. Then came Node.js—a game changer. Building full-stack applications felt like unlocking a new level. Express.js, Prisma, authentication, and databases—all pieces of a larger system I was learning to master. I worked on projects like an Inventory Management App, a Members Only clubhouse, a File Uploader, and a Blog API—each one pushing me further into the depths of backend logic, authentication, and cloud storage. But beyond the code, I learned resilience. Deployments failed. Bugs appeared at the worst times. Yet, with each setback, I grew.Today, I build software not just to solve problems, but to create experiences. What started as curiosity has turned into a passion, and every line of code I write is a reminder of how far I’ve come—and how much further I can go.",
+    "published": true
+}
+
+### Get all published posts (public)
+GET http://localhost:3000/posts
+
+### Get specific published post (public)
+GET http://localhost:3000/posts/bc2c5636-111f-4190-9005-61c6f56f59a0
+
+### Add comment to post (as normal user)
+POST http://localhost:3000/comments/bc2c5636-111f-4190-9005-61c6f56f59a0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5M2E5YzY1NS03ZmNkLTRmMGYtYmE4Zi03N2QxM2Y2MTE2MDciLCJpYXQiOjE3MzkxOTU0MzksImV4cCI6MTczOTE5NjMzOX0.JTU-q7RizQA2whcXODAF2T4re2DFzvkWRPQmIy8MPs8
+Content-Type: application/json
+
+{
+    "content": "This is a test comment"
+}
+
+### Update comment (as normal user)
+PUT http://localhost:3000/comments/04d8f1aa-213b-483c-84dc-1df3211d6904
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5M2E5YzY1NS03ZmNkLTRmMGYtYmE4Zi03N2QxM2Y2MTE2MDciLCJpYXQiOjE3MzkxOTU0MzksImV4cCI6MTczOTE5NjMzOX0.JTU-q7RizQA2whcXODAF2T4re2DFzvkWRPQmIy8MPs8
+Content-Type: application/json
+
+{
+    "content": "This is an updated comment"
+}
+
+### Get user's comments
+GET http://localhost:3000/comments/my
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5M2E5YzY1NS03ZmNkLTRmMGYtYmE4Zi03N2QxM2Y2MTE2MDciLCJpYXQiOjE3MzkxOTU0MzksImV4cCI6MTczOTE5NjMzOX0.JTU-q7RizQA2whcXODAF2T4re2DFzvkWRPQmIy8MPs8
+
+### Update post (as author)
+PUT http://localhost:3000/posts/my/bc2c5636-111f-4190-9005-61c6f56f59a0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5MjM3ZmZhNi0xNGE2LTQ2ODUtYTAwMy0xOTU0ZjAzMTkwZjAiLCJpYXQiOjE3MzkxOTU0OTcsImV4cCI6MTczOTE5NjM5N30.1xw-ctetMZNXpPylLr-clzOXDhhw0qBDufDygLXXqdE
+Content-Type: application/json
+
+{
+    "title": "Updated Test Post",
+    "content": "This is updated content",
+    "published": true
+}
+
+### Get author's posts
+GET http://localhost:3000/posts/my
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5MjM3ZmZhNi0xNGE2LTQ2ODUtYTAwMy0xOTU0ZjAzMTkwZjAiLCJpYXQiOjE3MzkxOTU0OTcsImV4cCI6MTczOTE5NjM5N30.1xw-ctetMZNXpPylLr-clzOXDhhw0qBDufDygLXXqdE
+
+### Delete comment (as normal user)
+DELETE http://localhost:3000/comments/04d8f1aa-213b-483c-84dc-1df3211d6904
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5M2E5YzY1NS03ZmNkLTRmMGYtYmE4Zi03N2QxM2Y2MTE2MDciLCJpYXQiOjE3MzkxOTU0MzksImV4cCI6MTczOTE5NjMzOX0.JTU-q7RizQA2whcXODAF2T4re2DFzvkWRPQmIy8MPs8
+
+### Delete post (as author)
+DELETE http://localhost:3000/posts/my/bc2c5636-111f-4190-9005-61c6f56f59a0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5MjM3ZmZhNi0xNGE2LTQ2ODUtYTAwMy0xOTU0ZjAzMTkwZjAiLCJpYXQiOjE3MzkxOTU0OTcsImV4cCI6MTczOTE5NjM5N30.1xw-ctetMZNXpPylLr-clzOXDhhw0qBDufDygLXXqdE
+
+### Logout user
+DELETE http://localhost:3000/auth/logout
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5M2E5YzY1NS03ZmNkLTRmMGYtYmE4Zi03N2QxM2Y2MTE2MDciLCJpYXQiOjE3MzkxOTU0MzksImV4cCI6MTczOTE5NjMzOX0.JTU-q7RizQA2whcXODAF2T4re2DFzvkWRPQmIy8MPs8
+Content-Type: application/json
+
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5M2E5YzY1NS03ZmNkLTRmMGYtYmE4Zi03N2QxM2Y2MTE2MDciLCJpYXQiOjE3MzkxOTU0MzksImV4cCI6MTczOTgwMDIzOX0.BdXroRfqP_FrTkZ2j8lnGw_L6vBCdyXC_AdbAGiFUCU"
+}
+
+### Logout author
+DELETE http://localhost:3000/auth/logout
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5MjM3ZmZhNi0xNGE2LTQ2ODUtYTAwMy0xOTU0ZjAzMTkwZjAiLCJpYXQiOjE3MzkxOTU0OTcsImV4cCI6MTczOTE5NjM5N30.1xw-ctetMZNXpPylLr-clzOXDhhw0qBDufDygLXXqdE
+Content-Type: application/json
+
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5MjM3ZmZhNi0xNGE2LTQ2ODUtYTAwMy0xOTU0ZjAzMTkwZjAiLCJpYXQiOjE3MzkxOTU0OTcsImV4cCI6MTczOTgwMDI5N30._4BPkbrZ_MJ8qVJclbO7VjrNTjlluD7p1y9QUJxk120"
+}
