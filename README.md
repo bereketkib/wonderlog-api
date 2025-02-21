@@ -91,11 +91,14 @@ cp .env.example .env
 Required environment variables:
 
 ```env
-DATABASE_URL="postgresql://username:password@localhost:5432/wonderlog"
-JWT_SECRET="your-jwt-secret"
-REFRESH_SECRET="your-refresh-secret"
+DATABASE_URL="database-connection-url"
+DIRECT_URL="direct-connection-url"
+JWT_SECRET= "your-jwt-secret"
+REFRESH_SECRET= "your-refresh-secret"
 JWT_EXPIRY="15m"
 REFRESH_EXPIRY="7d"
+FRONT_END_URL1="your-first-front-end-url"
+FRONT_END_URL2="your-second-front-end-url"
 PORT=3000
 ```
 
