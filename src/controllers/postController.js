@@ -9,6 +9,7 @@ const {
   getAuthorPostCount,
   getDashboardStats,
 } = require("../services/postService");
+const prisma = require("../config/database");
 
 // Public Controllers
 const getAllPublishedPosts = async (req, res, next) => {
