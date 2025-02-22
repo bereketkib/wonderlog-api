@@ -298,21 +298,6 @@ const getDashboardStats = async (authorId) => {
   const startOfToday = new Date();
   startOfToday.setHours(0, 0, 0, 0);
 
-  const refreshToken = prisma.refreshToken.findFirst({
-    where: {
-      userId: authorId,
-    },
-  });
-
-  const remainingTime = refreshToken.expiresAt.getTime() - Date.now();
-
-  res.cookie("refreshToken", refreshToken.token, {
-    httpOnly: true,
-    secure: true,
-    maxAge: remainingTime,
-    sameSite: "none",
-  });
-
   const [posts, comments, recentPosts, todayViews] = await Promise.all([
     // Get post stats
     prisma.post.groupBy({

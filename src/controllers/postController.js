@@ -106,7 +106,23 @@ const deleteMyPost = async (req, res, next) => {
 
 const getMyDashboardStats = async (req, res, next) => {
   try {
+    const refreshToken = await prisma.refreshToken.findFirst({
+      where: {
+        userId: req.user.id,
+      },
+    });
+
+    const remainingTime = refreshToken.expiresAt.getTime() - Date.now();
+
+    res.cookie("refreshToken", refreshToken.token, {
+      httpOnly: true,
+      secure: true,
+      maxAge: remainingTime,
+      sameSite: "none",
+    });
+
     const stats = await getDashboardStats(req.user.id);
+
     res.json(stats);
   } catch (error) {
     next(error);
